@@ -1,4 +1,4 @@
-#Homework Week 2
+#Homework Week 2 - Chipotle data, Command Line
 
 `$cd Desktop`
 
