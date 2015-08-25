@@ -1,2 +1,2 @@
 # Homework
-Repository for all Homework Assignments
+`Repository for all Homework Assignments`
