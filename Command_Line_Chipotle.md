@@ -1,9 +1,9 @@
 ***Homework Week 2***
 
-$cd Desktop
-$cd Git_Repos
-$cd Dat8
-cd data
+`$cd Desktop`
+`$cd Git_Repos`
+`$cd Dat8`
+`cd data`
 
 #1: What do you think each column means? What do you think each row means?
 The order_id - Just a sequential number for each order.
