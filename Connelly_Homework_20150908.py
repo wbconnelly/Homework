@@ -119,13 +119,57 @@ for g in genres:
     print df.iloc[0]
 
 # check if th.ere are multiple movies with the same title, and if so, determine if they are actually duplicates
-dup_lst = []
-for i in range(0,len(imdb.title)):    
-    title = imdb.title.pop(i)
-    if title in imdb.title:
-        dup_lst.append(title)
+
+from collections import Counter
+
+# create empty dictionary and fill it with key - value pairings of title and their occurences in the data
+title_dict = {}
+for i in range(1, len(imdb)):
+    if imdb.iloc[i][1] not in title_dict:
+        title_dict[imdb.iloc[i][1]] = 1
+    else:
+        title_dict[imdb.iloc[i][1]] += 1
+        
+# movies with duplicate titles are 
+#'The Girl with the Dragon Tattoo': 2, 'Les Miserables': 2, 
+#'True Grit': 2, 'Dracula': 2
+dup_titles = ['The Girl with the Dragon Tattoo', 'Les Miserables', 'True Grit', 'Dracula']
+imdb[imdb.title.isin(['The Girl with the Dragon Tattoo', 'Les Miserables', 'True Grit', 'Dracula'])].sort('title')
+# subsetting the IMDB dataframe to the list of duplicate title show that the list of actors is different for all of them so they are unlikely to be actual duplicates.
+
 
 # calculate the average star rating for each genre, but only include genres with at least 10 movies
+# create another dictionary tracking genres and the number of titles in each
+genre_dict = {}
+
+for i in range(1, len(imdb)):
+    if imdb.iloc[i][3] not in genre_dict:
+        genre_dict[imdb.iloc[i][3]] = 1
+    else:
+        genre_dict[imdb.iloc[i][3]] += 1
+
+# subset based on genres with more than 10 titles then group by genre and average the star_rating
+genre_10 = imdb[imdb.genre.isin(['Drama', 'Comedy', 'Action', 'Crime', 'Biography', 'Adventure', 'Animation', 'Horror', 'Mystery'])]
+genre_10= genre_10[['star_rating', 'genre']]
+genre_10.groupby('genre').mean()
+
+"""           star_rating
+genre                 
+Action        7.884559
+Adventure     7.933333
+Animation     7.914516
+Biography     7.862338
+Comedy        7.822436
+Crime         7.916935
+Drama         7.902518
+Horror        7.806897
+Mystery       7.975000"""
+
+
+
+
+    
+
 
 
 
