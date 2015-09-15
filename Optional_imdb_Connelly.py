@@ -17,8 +17,11 @@ Finally, convert that list into a DataFrame.
 from bs4 import BeautifulSoup
 import requests
 import lxml
+import pandas as pd
 
 id_list = ['tt0111161', 'tt0110912', 'tt0114709']
+#id_list = ['tt0111161']
+
 info_list = []
 
 def new_dict(x):
@@ -26,6 +29,7 @@ def new_dict(x):
     return x
 
 movie_list = {}
+movie_list_df = []
 for ids in id_list:
 
     r = requests.get('http://www.imdb.com/title/'+ids)
@@ -42,13 +46,22 @@ for ids in id_list:
 
     movie_dict = {}
     
+    #insert elements of the list into a dictionary with each element bearing the title name
     i = 0
     for item in title_info:
         movie_dict[item] = info_list[i]
         i += 1
+    #append each dictionary to a list of dictionaries.
     movie_list[title] = movie_dict
+    movie_list_df.append(movie_list[title])
+
+#create dataframe
+movie_df = pd.DataFrame(movie_list_df)
 
 
-print movie_list['The Shawshank Redemption']
-print movie_list['Pulp Fiction']
-print movie_list['Toy Story']
+
+
+
+
+
+
