@@ -12,6 +12,7 @@ import pandas as pd
 imdb = pd.read_csv("imdb_1000.csv", header = 0, na_filter = True)
 imdb.head()
 imdb.isnull().sum()
+
 # check the number of rows and columns
 imdb.shape
     # Out[27]: (979, 6)
